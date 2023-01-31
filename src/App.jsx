@@ -1,17 +1,27 @@
-import './App.css';
-import Portfolio from './Portfolio';
-import Form from './Form';
+import Portfolio from './components/Portfolio';
+import Form from './components/Form';
+
+import { useState } from 'react';
 import { useFetch } from './components/useFetch';
+
+import './App.css';
 
 function App() {
   const { documents, error } = useFetch('stocks');
+  const [stocks, setStocks] = useState();
+
+  const handleDelete = async (id) => {
+    setStocks((prevStocks) => {
+      return prevStocks.filter((st) => st.id !== id);
+    });
+  };
 
   console.log(documents);
 
   return (
     <div className='App'>
       <h3>PSE</h3>
-      <Portfolio />
+      <Portfolio stocks={documents} />
       <Form />
     </div>
   );

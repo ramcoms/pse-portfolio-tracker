@@ -4,8 +4,8 @@ import { createClient } from '@supabase/supabase-js';
 import { supabase } from '../supabase';
 
 export const useFetch = (table) => {
-  const [documents, setDocuments] = useState([]);
   const [error, setError] = useState(null);
+  const [documents, setDocuments] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -13,6 +13,7 @@ export const useFetch = (table) => {
 
       if (error) {
         setError(error);
+        console.log(error);
       }
 
       if (data) {

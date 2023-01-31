@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import './Form.css';
-import { supabase } from './supabase';
+import { supabase } from '../supabase';
 
 const Form = () => {
   const [stockName, setStockName] = useState('');
@@ -9,7 +9,7 @@ const Form = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    await supabase
+    const { data, error } = await supabase
       .from('stocks')
       .insert({ name: stockName.toUpperCase(), average_price: averagePrice });
 
