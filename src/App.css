@@ -1,0 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+.App {
+  font-family: Roboto, sans-serif;
+  padding: 8px;
+  min-height: 100dvh;
+  background-color: #e9e6e4;
+  color: #242424;
+}
