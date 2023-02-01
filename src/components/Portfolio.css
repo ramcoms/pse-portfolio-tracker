@@ -52,3 +52,11 @@
     font-size: 0.6rem;
     letter-spacing: 1px;
 }
+
+.total-group {
+    font-size: 0.9rem;
+    font-weight: 700;
+    padding: 8px 24px 16px 8px;
+    display: flex;
+    justify-content: space-between;
+}

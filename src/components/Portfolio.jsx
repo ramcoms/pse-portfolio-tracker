@@ -68,6 +68,10 @@ const Portfolio = ({ stocks, uri }) => {
           </div>
         </div>
       ))}
+      <div className='total-group'>
+        <span className='total'>Total</span>
+        <span className='total-amt'>1,000,000,000.00</span>
+      </div>
     </div>
   );
 };

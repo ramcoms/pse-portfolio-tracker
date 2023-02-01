@@ -16,6 +16,8 @@ function App() {
   const [showForm, setShowForm] = useState(false);
 
   const { documents } = useFetch('stocks');
+  const { documents: names } = useFetch('stocks', 'name');
+  console.log(names);
 
   return (
     <div className='App'>
