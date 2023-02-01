@@ -2,17 +2,26 @@
     margin: 1.75rem 0;
     display: grid;
     place-items: center;
-    gap: 1.25rem;
+    gap: 16px;
     font-size: 0.8rem;
 }
 
-.form-group {
+/* .form-group {
     display: grid;
     gap: 0.5rem;
+} */
+
+.form-group > input,
+.form-group > select {
+    font-family: inherit;
+    color: inherit;
+    border: none;
+    padding: 8px 4px;
+    width: 150px;
 }
 
-.form-group > input {
-    font-family: inherit;
-    padding: 2px 4px;
-    width: 100px;
+::placeholder {
+    font-size: 0.7rem;
+    opacity: 0.6;
+    letter-spacing: 1px;
 }
