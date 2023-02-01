@@ -9,12 +9,19 @@ const Form = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    if (!stockName || stockName === '' || !averagePrice) {
+      console.log('error');
+      return;
+    }
+
     const { data, error } = await supabase
       .from('stocks')
       .insert({ name: stockName.toUpperCase(), average_price: averagePrice });
 
     setStockName('');
     setAveragePrice();
+
+    window.location.reload(false);
   };
 
   return (
@@ -22,6 +29,7 @@ const Form = () => {
       <div className='form-group'>
         <label>Stock</label>
         <input
+          required
           type='text'
           name='stock-name'
           onChange={(e) => setStockName(e.target.value.toUpperCase())}
@@ -32,8 +40,9 @@ const Form = () => {
       <div className='form-group'>
         <label>Average Price</label>
         <input
+          required
           type='number'
-          step='0.01'
+          step='0.0001'
           name='ave-price'
           onChange={(e) => setAveragePrice(e.target.value)}
           value={averagePrice}

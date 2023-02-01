@@ -1,5 +1,5 @@
 .stock-form {
-    margin: 16px 0;
+    margin: 1.75rem 0;
     display: grid;
     place-items: center;
     gap: 1.25rem;
@@ -9,10 +9,10 @@
 .form-group {
     display: grid;
     gap: 0.5rem;
-    width: 200px;
 }
 
 .form-group > input {
     font-family: inherit;
     padding: 2px 4px;
+    width: 100px;
 }

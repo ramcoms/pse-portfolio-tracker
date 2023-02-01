@@ -1,10 +1,11 @@
 .portfolio-container {
     background-color: #fff;
     border-radius: 8px;
-    width: 300px;
+    width: 500px;
+    max-width: 95dvw;
     margin: 16px auto;
-    padding: 2px 16px;
-    font-size: 0.9rem;
+    padding: 2px 10px;
+    font-size: 0.8rem;
 }
 
 .card {
@@ -33,12 +34,28 @@
     opacity: 0.4;
 }
 
-.card--right {
-    align-items: flex-end;
-}
-
 .delete-btn {
     margin: 0;
     padding: 0 4px;
-    color: red;
+    opacity: 0.5;
+    font-size: 0.7rem;
+}
+.delete-btn:hover {
+    border-color: lightcoral;
+}
+
+.gain {
+    color: green;
+    font-weight: 500;
+}
+
+.loss {
+    color: lightcoral;
+    font-weight: 500;
+}
+
+.update {
+    padding-bottom: 8px;
+    font-size: 0.6rem;
+    opacity: 0.5;
 }

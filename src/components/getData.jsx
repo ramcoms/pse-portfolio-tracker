@@ -1,27 +1,25 @@
 import { useEffect, useState } from 'react';
 import { supabase } from '../supabase';
 
-export const useFetch = (table) => {
+export const getData = (uri) => {
   const [error, setError] = useState(null);
   const [documents, setDocuments] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
-      const { error, data } = await supabase.from(table).select();
-
-      if (error) {
-        setError(error);
-        console.log(error);
-      }
-
-      if (data) {
+      try {
+        const res = await fetch(uri);
+        const data = await res.json();
         setDocuments(data);
         setError(null);
+      } catch (err) {
+        setError(err);
+        console.log(err);
       }
     };
 
     fetchData();
-  }, [table]);
+  }, []);
 
   return { error, documents };
 };
