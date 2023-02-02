@@ -66,23 +66,22 @@ const Portfolio = ({ stocks, uri }) => {
           <div className='card--left'>
             <span className='stock-name'>{stock.name}</span>
             <span className='ave-price'>{stock.average_price.toFixed(2)}</span>
-            <span className='total-shares'>{stock.total_shares} sh</span>
+            <span className='total-shares'>
+              {NumberFormatter(stock.total_shares)} shares
+            </span>
           </div>
           <div className='card--right'>
+            <span className='mkt-value'>
+              {calculateMarketValue(getPrice(stock.name), stock.total_shares)}
+            </span>
             <span className='current-price'>{getPrice(stock.name)}</span>
             <span className='profit'>
               {calculateProfitLoss(stock.average_price, getPrice(stock.name))}
             </span>
-            <span className='mkt-value'>
-              {calculateMarketValue(getPrice(stock.name), stock.total_shares)}
-            </span>
-            <button
-              className='delete-btn'
-              onClick={() => handleDelete(stock.id)}
-            >
-              x
-            </button>
           </div>
+          <button className='delete-btn' onClick={() => handleDelete(stock.id)}>
+            x
+          </button>
         </div>
       ))}
       <div className='total-group'>
