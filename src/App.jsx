@@ -3,7 +3,7 @@ import Portfolio from './components/Portfolio';
 import Form from './components/Form';
 
 // hooks
-import { useFetch } from './components/useFetch';
+import { fetchDB } from './components/fetchDB';
 
 // styling
 import './App.css';
@@ -15,9 +15,7 @@ const pse_uri = 'https://phisix-api3.appspot.com/stocks.json';
 function App() {
   const [showForm, setShowForm] = useState(false);
 
-  const { documents } = useFetch('stocks');
-  const { documents: names } = useFetch('stocks', 'name');
-  console.log(names);
+  const { documents } = fetchDB('stocks');
 
   return (
     <div className='App'>

@@ -7,4 +7,10 @@
   min-height: 100dvh;
   background-color: #F2F2F7FF;
   color: #242424;
+  letter-spacing: 1px;
+}
+
+.error {
+  font-size: 0.7rem;
+  color: lightcoral;
 }

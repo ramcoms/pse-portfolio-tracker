@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { supabase } from '../supabase';
-import { getData } from './getData';
+import { supabase } from '../config/supabase';
+import { fetchAPI } from './fetchAPI';
 
 // styles
 import './Form.css';
@@ -9,8 +9,9 @@ const Form = ({ uri }) => {
   const [stockName, setStockName] = useState('');
   const [averagePrice, setAveragePrice] = useState();
   const [totalShares, setTotalShares] = useState();
+  const [error, setError] = useState(null);
 
-  const { documents } = getData(uri);
+  const { documents } = fetchAPI(uri);
 
   let symbolList = [];
   const getList = () => {
@@ -26,8 +27,9 @@ const Form = ({ uri }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!stockName || stockName === '' || !averagePrice) {
-      console.log('error');
+    if (!symbolList.includes(stockName)) {
+      setError('ticker not found');
+      setStockName('');
       return;
     }
 
@@ -88,6 +90,7 @@ const Form = ({ uri }) => {
       </div>
 
       <button className='add-btn'>+</button>
+      <p className='error'>{error}</p>
     </form>
   );
 };

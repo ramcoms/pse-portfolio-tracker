@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import { supabase } from '../supabase';
+import { supabase } from '../config/supabase';
 
-export const getData = (uri) => {
+export const fetchAPI = (uri) => {
   const [error, setError] = useState(null);
   const [documents, setDocuments] = useState([]);
 
