@@ -4,6 +4,11 @@
   box-sizing: border-box;
 }
 
+body {
+  font-family: Roboto, sans-serif;
+  background-color: #F2F2F7FF;
+}
+
 a {
   font-weight: 500;
   color: #646cff;
@@ -14,16 +19,22 @@ a:hover {
 }
 
 button {
-  margin: 8px 0;
-  padding: 0.6em 1.2em;
   border-radius: 8px;
+  padding: 4px 16px;
   border: 1px solid transparent;
   font-weight: 500;
   font-family: inherit;
-  background-color: #fff;
+  background-color: transparent;
   cursor: pointer;
   transition: border-color 0.25s;
+  font-size: 1.2rem;
+  color: #72ba9b;
 }
 button:hover {
-  border-color: #646cff;
+  border-color: #72ba9b;
+}
+
+.error {
+  font-size: 0.7rem;
+  color: lightcoral;
 }

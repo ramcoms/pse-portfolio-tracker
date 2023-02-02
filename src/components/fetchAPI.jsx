@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { supabase } from '../config/supabase';
 
 export const fetchAPI = (uri) => {
   const [error, setError] = useState(null);

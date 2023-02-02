@@ -55,15 +55,12 @@ const Portfolio = ({ stocks, uri }) => {
     window.location.reload(false);
   };
 
-  const dateUpdated = documents.as_of ? documents.as_of.slice(0, 10) : '';
-
   const NumberFormatter = (value) => {
     return parseFloat(parseFloat(value).toFixed(0)).toLocaleString();
   };
 
   return (
     <div className='portfolio-container'>
-      <p className='update'>as of: {dateUpdated} </p>
       {stocks.map((stock) => (
         <div className='card' key={stock.id}>
           <div className='card--left'>
@@ -89,7 +86,7 @@ const Portfolio = ({ stocks, uri }) => {
         </div>
       ))}
       <div className='total-group'>
-        <span className='total'>Total</span>
+        <span className='total'>Total market value</span>
         <span className='total-amt'>{NumberFormatter(totalMarketValue)}</span>
       </div>
     </div>

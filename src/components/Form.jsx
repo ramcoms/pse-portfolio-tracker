@@ -14,6 +14,7 @@ const Form = ({ uri }) => {
   const { documents } = fetchAPI(uri);
 
   let symbolList = [];
+
   const getList = () => {
     const arr = documents.stock;
     if (arr) {

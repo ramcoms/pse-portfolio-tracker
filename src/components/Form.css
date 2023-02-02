@@ -2,25 +2,26 @@
     margin: 1.75rem 0;
     display: grid;
     place-items: center;
-    gap: 16px;
+    gap: 12px;
     font-size: 0.8rem;
+    position: absolute;
+    background-color:  #1a2836;
+    padding: 16px;
+    border-radius: 8px;
+    z-index: 1;
+    right: 16px;
+    top: 8px;
 }
-
-/* .form-group {
-    display: grid;
-    gap: 0.5rem;
-} */
 
 .form-group > input {
     font-family: inherit;
     color: inherit;
     border: none;
-    padding: 8px 4px;
+    padding: 10px 8px;
     width: 150px;
 }
 
 ::placeholder {
-    font-size: 0.7rem;
-    opacity: 0.6;
-    letter-spacing: 1px;
+    font-size: 0.7em;
+    opacity: 0.5;
 }
