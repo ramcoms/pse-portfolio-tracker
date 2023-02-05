@@ -13,8 +13,7 @@
 
 .update {
   font-size: 0.6rem;
-  opacity: 0.5;
-  color: red;
+  opacity: 0.3;
   text-align: right;
-  padding-right: 16px;
+  padding-right: 32px;
 }

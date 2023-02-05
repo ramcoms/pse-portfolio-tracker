@@ -45,8 +45,9 @@ const Portfolio = ({ stocks, uri }) => {
 
   // compute gain/loss
   const calculateProfitLoss = (ave_price, mkt_price) => {
-    const profitLoss =
-      (((mkt_price * 0.99105 - ave_price) / ave_price) * 100).toFixed(2) + '%';
+    const profitLoss = mkt_price
+      ? ((mkt_price * 0.99105 - ave_price) / ave_price) * 100
+      : 1;
     return profitLoss;
   };
 
@@ -65,17 +66,24 @@ const Portfolio = ({ stocks, uri }) => {
         <div className='card' key={stock.id}>
           <div className='card--left'>
             <span className='stock-name'>{stock.name}</span>
-            <span className='ave-price'>{stock.average_price.toFixed(2)}</span>
+            <span className='ave-price'>
+              average: ₱ {stock.average_price.toFixed(2)}
+            </span>
             <span className='total-shares'>
-              {NumberFormatter(stock.total_shares)} shares
+              shares: {NumberFormatter(stock.total_shares)}
             </span>
           </div>
           <div className='card--right'>
             <span className='mkt-value'>
-              {calculateMarketValue(getPrice(stock.name), stock.total_shares)}
+              ₱ {calculateMarketValue(getPrice(stock.name), stock.total_shares)}
             </span>
-            <span className='current-price'>{getPrice(stock.name)}</span>
+            <span className='current-price'>
+              current: ₱ {getPrice(stock.name)}
+            </span>
             <span className='profit'>
+              {/* <span
+              className={`${parseInt(this.innerText) > 1 ? 'profit' : 'loss'}`}
+            > */}
               {calculateProfitLoss(stock.average_price, getPrice(stock.name))}
             </span>
           </div>
@@ -86,7 +94,7 @@ const Portfolio = ({ stocks, uri }) => {
       ))}
       <div className='total-group'>
         <span className='total'>Total market value</span>
-        <span className='total-amt'>{NumberFormatter(totalMarketValue)}</span>
+        <span className='total-amt'>₱ {NumberFormatter(totalMarketValue)}</span>
       </div>
     </div>
   );

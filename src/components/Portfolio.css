@@ -39,10 +39,14 @@
 
 .ave-price,
 .total-shares,
-.profit,
+/* .profit, */
 .current-price {
     font-size: 0.6rem;
-    opacity: 0.4;
+    opacity: 0.3;
+}
+
+.profit {
+    color: #72ba9b;
 }
 
 .delete-btn {
@@ -60,7 +64,7 @@
     align-items: center;
 }
 .total-amt {
-    padding: 4px 8px;
+    padding: 8px 12px;
     color: #72ba9b;
     background-color: #1a2836;
     border-radius: 8px;

@@ -59,8 +59,10 @@ const Form = ({ uri }) => {
           placeholder='ticker'
         />
         <datalist id='symbol-list'>
-          {symbolList.map((item) => (
-            <option value={item}>{item}</option>
+          {symbolList.map((item, index) => (
+            <option value={item} key={index}>
+              {item}
+            </option>
           ))}
         </datalist>
       </div>
