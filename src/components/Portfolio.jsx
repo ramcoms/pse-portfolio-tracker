@@ -75,16 +75,16 @@ const Portfolio = ({ stocks, uri }) => {
           </div>
           <div className='card--right'>
             <span className='mkt-value'>
-              ₱ {calculateMarketValue(getPrice(stock.name), stock.total_shares)}
+              {/* ₱ {calculateMarketValue(getPrice(stock.name), stock.total_shares)} */}
+              ₱ {stock.market_value}
             </span>
             <span className='current-price'>
-              current: ₱ {getPrice(stock.name)}
+              {/* current: ₱ {getPrice(stock.name)} */}
+              current: ₱ {stock.current_price}
             </span>
             <span className='profit'>
-              {/* <span
-              className={`${parseInt(this.innerText) > 1 ? 'profit' : 'loss'}`}
-            > */}
-              {calculateProfitLoss(stock.average_price, getPrice(stock.name))}
+              {/* {calculateProfitLoss(stock.average_price, getPrice(stock.name))} */}
+              {stock.profit_loss}
             </span>
           </div>
           <button className='delete-btn' onClick={() => handleDelete(stock.id)}>

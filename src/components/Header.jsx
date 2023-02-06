@@ -8,7 +8,9 @@ const Header = ({ uri }) => {
 
   return (
     <div className='header'>
-      <h4>R's portfolio</h4>
+      <h4>Your portfolio</h4>
+
+      <p className='register'>Register</p>
 
       <div className='btn-group'>
         {!showForm && (

@@ -8,3 +8,22 @@
     justify-content: space-between;
     align-items: center;
 }
+
+.header > h4 {
+    margin-right: auto;
+}
+
+.register {
+    font-size: 0.8rem;
+    font-weight: 500;
+    cursor: pointer;
+    color: #9ca3af;
+    margin-right: 8px;
+    }
+
+.register:hover {
+    text-decoration: underline;
+    text-decoration-color: #72ba9b;
+    text-decoration-thickness: 3px;
+}
+
