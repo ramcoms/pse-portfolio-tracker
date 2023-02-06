@@ -19,6 +19,7 @@
     border: none;
     padding: 10px 8px;
     width: 150px;
+    letter-spacing: 1.1px;
 }
 
 ::placeholder {

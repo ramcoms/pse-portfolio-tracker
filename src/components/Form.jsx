@@ -16,28 +16,7 @@ const Form = ({ uri }) => {
 
   const { documents } = fetchAPI(uri);
 
-  // get stock price from API
-  const getPrice = (stockName) => {
-    const stockList = documents.stock;
-    if (stockList) {
-      const stockData = stockList.find(({ symbol }) => symbol === stockName);
-      const { price } = stockData;
-      setCurrentPrice(price.amount);
-    }
-  };
-
-  // compute market value of each stock
-  const calculateMarketValue = (price, shares) => {
-    setMarketValue(price * shares * 0.99105);
-  };
-
-  // compute gain/loss
-  const calculateProfitLoss = (ave_price, price) => {
-    setProfitLoss(
-      price ? ((price * 0.99105 - ave_price) / ave_price) * 100 : 1
-    );
-  };
-
+  // populate tickers
   let symbolList = [];
   const getList = () => {
     const arr = documents.stock;
@@ -46,13 +25,33 @@ const Form = ({ uri }) => {
     }
     return symbolList;
   };
-
   getList();
-  getPrice(stockName);
 
-  // functions
-  // calculateMarketValue(currentPrice, totalShares);
-  // calculateProfitLoss(averagePrice, currentPrice);
+  // get stock price from API
+  const getPrice = (name, average, shares) => {
+    const stockList = documents.stock;
+    const stockData = stockList.find(({ symbol }) => symbol === name);
+    const { price } = stockData;
+    const amount = price.amount;
+    console.log(amount);
+
+    setCurrentPrice(amount);
+    setMarketValue(amount * shares * 0.99105);
+    setProfitLoss((amount * 0.99105 - average) / average);
+
+    console.log(currentPrice);
+  };
+
+  // compute market value of each stock
+  // const calculateMarketValue = (price, shares) => {
+  // };
+
+  // compute gain/loss
+  // const calculateProfitLoss = (ave_price, price) => {
+  //   setProfitLoss(
+  //     price ? ((price * 0.99105 - ave_price) / ave_price) * 100 : 0
+  //   );
+  // };
 
   // SUBMIT FORM
   const handleSubmit = async (e) => {
@@ -65,19 +64,7 @@ const Form = ({ uri }) => {
       return;
     }
 
-    console.log(
-      stockName,
-      averagePrice,
-      totalShares,
-      currentPrice,
-      marketValue,
-      profitLoss
-    );
-
-    if (!currentPrice || !marketValue || !profitLoss) {
-      console.log('loading');
-      return;
-    }
+    getPrice(stockName, averagePrice, totalShares);
 
     // update database
     // const { data, error } = await supabase.from('stocks').insert({
@@ -100,8 +87,6 @@ const Form = ({ uri }) => {
     // window.location.reload(false);
   };
 
-  console.log(stockName);
-
   return (
     <form className='stock-form' onSubmit={handleSubmit}>
       <div className='form-group'>
@@ -110,7 +95,7 @@ const Form = ({ uri }) => {
           required
           list='symbol-list'
           onChange={(e) => setStockName(e.target.value)}
-          value={stockName}
+          value={stockName || ''}
           placeholder='ticker'
         />
         <datalist id='symbol-list'>
@@ -130,7 +115,7 @@ const Form = ({ uri }) => {
           inputMode='decimal'
           name='ave-price'
           onChange={(e) => setAveragePrice(e.target.value)}
-          value={averagePrice}
+          value={averagePrice || ''}
           placeholder='average price'
         />
       </div>
@@ -142,7 +127,7 @@ const Form = ({ uri }) => {
           type='number'
           name='total-shares'
           onChange={(e) => setTotalShares(e.target.value)}
-          value={totalShares}
+          value={totalShares || ''}
           placeholder='total shares'
         />
       </div>
