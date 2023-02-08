@@ -16,6 +16,7 @@ const Portfolio = ({ documents, stocks, uri }) => {
     if (stockList) {
       const stockData = stockList.find(({ symbol }) => symbol === stockName);
       price = stockData.price.amount;
+
       return price;
     }
   };

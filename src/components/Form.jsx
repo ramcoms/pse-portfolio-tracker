@@ -9,6 +9,7 @@ const Form = ({ uri }) => {
   const [stockName, setStockName] = useState('');
   const [averagePrice, setAveragePrice] = useState();
   const [totalShares, setTotalShares] = useState();
+  const [cost, setCost] = useState(0);
   const [error, setError] = useState(null);
 
   // get data from API
@@ -24,6 +25,11 @@ const Form = ({ uri }) => {
     return symbolList;
   };
   getList();
+
+  // compute cost
+  const calculateCost = (average, shares) => {
+    setCost((average * shares * 1.00295).toLocaleString());
+  };
 
   // SUBMIT FORM
   const handleSubmit = async (e) => {
@@ -94,6 +100,16 @@ const Form = ({ uri }) => {
           value={totalShares || ''}
           placeholder='total shares'
         />
+      </div>
+
+      <div className='cost'>
+        <p>Cost inc. fees: </p>
+        <p className='cost-amt'>
+          ₱
+          {totalShares
+            ? (averagePrice * totalShares * 1.00295).toLocaleString()
+            : 0}
+        </p>
       </div>
 
       <button className='add-btn'>+</button>
