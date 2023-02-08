@@ -13,13 +13,21 @@
     top: 8px;
 }
 
+.form-group {
+    display: grid;
+    gap: 4px;
+    color: #fff;
+    font-size: 0.6rem;
+}
+
 .form-group > input {
     font-family: inherit;
-    color: inherit;
+    color: #131313;
     border: none;
     padding: 10px 8px;
     width: 150px;
     letter-spacing: 1.1px;
+    border-radius: 4px;
 }
 
 ::placeholder {

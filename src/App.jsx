@@ -14,14 +14,15 @@ const pse_uri = 'https://phisix-api3.appspot.com/stocks.json';
 
 function App() {
   const { documents: stockDB } = fetchDB('stocks');
-  const { documents: date } = fetchAPI(pse_uri);
+  const { documents } = fetchAPI(pse_uri);
 
-  const dateUpdated = date.as_of ? date.as_of.slice(0, 10) : '';
+  const date = documents.as_of;
+  const dateUpdated = date ? date.slice(0, 10) : '';
 
   return (
     <div className='App'>
       <Header uri={pse_uri} />
-      <Portfolio stocks={stockDB} uri={pse_uri} />
+      <Portfolio documents={documents} stocks={stockDB} uri={pse_uri} />
       <p className='update'>as of {dateUpdated} </p>
     </div>
   );

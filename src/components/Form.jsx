@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { fetchAPI } from './fetchAPI';
+import { supabase } from '../config/supabase';
 
 // styles
 import './Form.css';
@@ -8,12 +9,9 @@ const Form = ({ uri }) => {
   const [stockName, setStockName] = useState('');
   const [averagePrice, setAveragePrice] = useState();
   const [totalShares, setTotalShares] = useState();
-  const [currentPrice, setCurrentPrice] = useState(0);
-  const [marketValue, setMarketValue] = useState(0);
-  const [profitLoss, setProfitLoss] = useState(0);
-
   const [error, setError] = useState(null);
 
+  // get data from API
   const { documents } = fetchAPI(uri);
 
   // populate tickers
@@ -27,32 +25,6 @@ const Form = ({ uri }) => {
   };
   getList();
 
-  // get stock price from API
-  const getPrice = (name, average, shares) => {
-    const stockList = documents.stock;
-    const stockData = stockList.find(({ symbol }) => symbol === name);
-    const { price } = stockData;
-    const amount = price.amount;
-    console.log(amount);
-
-    setCurrentPrice(amount);
-    setMarketValue(amount * shares * 0.99105);
-    setProfitLoss((amount * 0.99105 - average) / average);
-
-    console.log(currentPrice);
-  };
-
-  // compute market value of each stock
-  // const calculateMarketValue = (price, shares) => {
-  // };
-
-  // compute gain/loss
-  // const calculateProfitLoss = (ave_price, price) => {
-  //   setProfitLoss(
-  //     price ? ((price * 0.99105 - ave_price) / ave_price) * 100 : 0
-  //   );
-  // };
-
   // SUBMIT FORM
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -64,38 +36,30 @@ const Form = ({ uri }) => {
       return;
     }
 
-    getPrice(stockName, averagePrice, totalShares);
-
     // update database
-    // const { data, error } = await supabase.from('stocks').insert({
-    //   name: stockName,
-    //   average_price: averagePrice,
-    //   total_shares: totalShares,
-    //   current_price: currentPrice,
-    //   market_value: marketValue,
-    //   profit_loss: profitLoss,
-    // });
+    const { data, error } = await supabase.from('stocks').insert({
+      name: stockName,
+      average_price: averagePrice,
+      total_shares: totalShares,
+    });
 
     // reset form
-    // setStockName('');
-    // setAveragePrice();
-    // setTotalShares();
-    // setCurrentPrice();
-    // setMarketValue();
-    // setProfitLoss();
+    setStockName('');
+    setAveragePrice();
+    setTotalShares();
 
-    // window.location.reload(false);
+    window.location.reload(false);
   };
 
   return (
     <form className='stock-form' onSubmit={handleSubmit}>
       <div className='form-group'>
-        <label></label>
+        <label>TICKER</label>
         <input
           required
           list='symbol-list'
           onChange={(e) => setStockName(e.target.value)}
-          value={stockName || ''}
+          value={stockName}
           placeholder='ticker'
         />
         <datalist id='symbol-list'>
@@ -108,7 +72,7 @@ const Form = ({ uri }) => {
       </div>
 
       <div className='form-group'>
-        <label></label>
+        <label>AVE. PRICE</label>
         <input
           required
           type='text'
@@ -121,7 +85,7 @@ const Form = ({ uri }) => {
       </div>
 
       <div className='form-group'>
-        <label></label>
+        <label>NO. OF SHARES</label>
         <input
           required
           type='number'

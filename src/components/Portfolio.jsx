@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { fetchAPI } from './fetchAPI';
 
 // database
@@ -7,34 +6,32 @@ import { supabase } from '../config/supabase';
 // styles
 import './Portfolio.css';
 
-const Portfolio = ({ stocks, uri }) => {
+const Portfolio = ({ documents, stocks, uri }) => {
   // get data from API
-  const { documents } = fetchAPI(uri);
-
-  let marketValuesArr = [];
-  let totalMarketValue = 0;
 
   // get stock price from API
   const getPrice = (stockName) => {
+    let price;
     const stockList = documents.stock;
     if (stockList) {
       const stockData = stockList.find(({ symbol }) => symbol === stockName);
-      const { name, price, symbol } = stockData;
-      return price.amount.toFixed(2);
+      price = stockData.price.amount;
+      return price;
     }
   };
 
   // compute market value of each stock
-  const calculateMarketValue = (mkt_price, shares) => {
-    const mkt_value = mkt_price * shares * 0.99105;
+  let marketValuesArr = [];
+  const calculateMarketValue = (current, shares) => {
+    const marketValue = current * shares * 0.99105;
+    marketValuesArr.push(marketValue);
+    calculateTotal(marketValuesArr, marketValue);
 
-    marketValuesArr.push(mkt_value);
-    calculateTotal(marketValuesArr, mkt_value);
-
-    return NumberFormatter(mkt_value);
+    return NumberFormatter(marketValue);
   };
 
   // compute total market value of ALL stocks
+  let totalMarketValue = 0;
   const calculateTotal = (arr) => {
     totalMarketValue = arr.reduce((a, b) => {
       return a + b;
@@ -48,6 +45,7 @@ const Portfolio = ({ stocks, uri }) => {
     const profitLoss = mkt_price
       ? ((mkt_price * 0.99105 - ave_price) / ave_price) * 100
       : 1;
+
     return profitLoss;
   };
 
@@ -75,12 +73,10 @@ const Portfolio = ({ stocks, uri }) => {
           </div>
           <div className='card--right'>
             <span className='mkt-value'>
-              {/* ₱ {calculateMarketValue(getPrice(stock.name), stock.total_shares)} */}
-              ₱ {stock.market_value}
+              ₱ {calculateMarketValue(getPrice(stock.name), stock.total_shares)}
             </span>
             <span className='current-price'>
-              {/* current: ₱ {getPrice(stock.name)} */}
-              current: ₱ {stock.current_price}
+              current: ₱ {getPrice(stock.name).toFixed(2)}
             </span>
             <span className='profit'>
               {/* {calculateProfitLoss(stock.average_price, getPrice(stock.name))} */}
